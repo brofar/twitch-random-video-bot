@@ -10,7 +10,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 
-const NONCE = '2345789hryunfidsjkl';
+const NONCE = MakeId(15);
 const PORT = 3000;
 
 // WEBSERVER
@@ -176,6 +176,18 @@ function PlayRandomVideo() {
     SendNotification(randomVideo);
 }
 
+function MakeId(length) {
+    //https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
+
 // RUN!
 (async () => {
     const args = process.argv.slice(2);
@@ -193,7 +205,7 @@ function PlayRandomVideo() {
 
     await FirstConfig().then(() => {
         ConnectPubSub();
-    
+
         server.listen(PORT, () => {
             console.log('[STATUS]', `Webserver started. Create a browser source that points to http://localhost:${PORT}.`);
         });

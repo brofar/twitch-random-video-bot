@@ -4,10 +4,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,node
 
 *.mp4
-
 .node-persist/
-
 *.exe
+*.zip
 
 ### Node ###
 # Logs
